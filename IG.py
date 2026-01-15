@@ -49,7 +49,7 @@ def load_following(path: Path) -> List[str]:
 
 def main() -> None:
     # Put the json files in the same folder as this script, or update these paths.
-    base = Path("/Users/binhnguyen/Downloads/connections")
+    base = Path("/Users/binhnguyen/Downloads/connections/followers_and_following")
     
     followers_path = base / "followers_1.json"
     following_path = base / "following.json"
