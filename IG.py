@@ -7,37 +7,30 @@ cwd = os.getcwd()
 print (cwd)
 
 # Path
-path = '/Users/binhnguyen/Desktop/'
+path = '/Users/binhnguyen/Downloads/connections/followers_and_following/'
 f1 = 'followers_1.json'
 f2 = 'following.json'
 
-def load_file (path, ff, followers):
+def load_file (path, ff, boolean):
     f = open (path + ff)
     parse = json.load (f)
+    
+    if (boolean == 1):    
+        followers = []
+        for i in parse: 
+            followers.append(i['string_list_data'][0]['value'])
+        return (followers)
 
-    # Loop through to load files into follwering
-    if (followers == 1):    
-    # Number of follwers/following
-        n = len (parse)
-        followering = ['']*n
-
-        for i in range (n):
-            followering [i] = parse [i]['string_list_data'][0]['value']
     else:
-        # Number of follwers/following
-        n = len (parse['relationships_following'])
-        followering = ['']*n
-        
-        for i in range (n):
-            followering [i] = parse ['relationships_following'][i]['string_list_data'][0]['value']
-
-    return (followering)
+        following = []
+        for i in parse['relationships_following']:
+            following.append(i['title'])
+        return (following)
 
 followers = load_file (path,f1,1)
 following = load_file (path,f2,0)
 
-# Compare following and followers
-# Condition: the person I am following is not in my followers [They do not follow me back]
+# Compare following and follower: The person I am following is not in my followers
 set = []
 for i in following:
     if (i not in followers):
